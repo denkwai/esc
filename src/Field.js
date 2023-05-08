@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 
-import questions from './data/questions.json';
+import options from './data/options.json';
 import Cell from './Cell';
 import { createAnswerMap, createGrid, checkMapForWin } from './utils';
 import { SIZE } from './constants';
@@ -11,10 +11,10 @@ import './Field.css';
 function Field() {
     const [gameOver, setGameOver] = useLocalStorageState('isGameOver', { defaultValue: false });
     const [answerMap, setAnswerMap] = useLocalStorageState('answerMap', { defaultValue: createAnswerMap(SIZE) });
-    const [grid, setGrid] = useLocalStorageState('grid', { defaultValue: createGrid(questions, SIZE) })
+    const [grid, setGrid] = useLocalStorageState('grid', { defaultValue: createGrid(options, SIZE) })
     const rows = grid.map(createRow);
     const resetGame = useCallback(() => {
-        setGrid(createGrid(questions, SIZE));
+        setGrid(createGrid(options, SIZE));
         setAnswerMap(createAnswerMap(SIZE));
         setGameOver(false);
     }, [setGrid, setAnswerMap, setGameOver])
