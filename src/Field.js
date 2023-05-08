@@ -8,7 +8,8 @@ import { SIZE } from './constants';
 
 import './Field.css';
 
-function Field({gameOver = false, setGameOver = () => {}}) {
+function Field() {
+    const [gameOver, setGameOver] = useLocalStorageState('isGameOver', { defaultValue: false });
     const [answerMap, setAnswerMap] = useLocalStorageState('answerMap', { defaultValue: createAnswerMap(SIZE) });
     const [grid, setGrid] = useLocalStorageState('grid', { defaultValue: createGrid(questions, SIZE) })
     const rows = grid.map(createRow);
@@ -65,7 +66,7 @@ function Field({gameOver = false, setGameOver = () => {}}) {
     }, [gameOver])
 
     return <>
-        <button className="ResetGameButton" onClick={() => { resetGame() }}>🔃 new game</button>
+        <button className="ResetGameButton" onClick={() => { resetGame() }}>🔃</button>
 
         <main className='Field'>
             {rows}

@@ -1,12 +1,14 @@
 .Field {
     max-width: 700px;
     margin: 0 auto;
-    border: 1px solid green;
+    border: 1px solid #ccc;
+    border-left: 0;
+    border-right: 0;
 }
 
 .Row {
     display: flex;
-    border-bottom: 1px solid green;
+    border-bottom: 1px solid #ccc;
 }
 
 .Row:last-child {
@@ -15,10 +17,10 @@
 
 .ResetGameButton {
     font-size: 20px;
-    padding: .3rem .7rem .5rem .5rem;
+    padding: .3rem .5rem .5rem;
     margin: 0;
     border: 0;
-    background: grey;
+    background: rgba(220,220,220,.3);
     position: absolute;
     top: 0;
     right: 0;

@@ -3,17 +3,17 @@ import useLocalStorageState from 'use-local-storage-state';
 
 import './App.css';
 import Field from './Field';
+import logo from './assets/logo.png';
 
 function App() {
-  const [gameOver, setGameOver] = useLocalStorageState('isGameOver', { defaultValue: false });
 
   return (
     <div className="App">
       <header className="App-header">
-        ESC BINGO!
+        <img src={logo} alt='Eurovision Bingo' title='Eurovision Bingo' className='App-logo' />
       </header>
 
-      <Field gameOver={gameOver} setGameOver={setGameOver} />
+      <Field />
     </div>
   );
 }
