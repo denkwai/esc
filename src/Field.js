@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 
 import questions from './data/questions.json';
@@ -13,6 +13,11 @@ function Field() {
     const [answerMap, setAnswerMap] = useLocalStorageState('answerMap', { defaultValue: createAnswerMap(SIZE) });
     const [grid, setGrid] = useLocalStorageState('grid', { defaultValue: createGrid(questions, SIZE) })
     const rows = grid.map(createRow);
+    const resetGame = useCallback(() => {
+        setGrid(createGrid(questions, SIZE));
+        setAnswerMap(createAnswerMap(SIZE));
+        setGameOver(false);
+    }, [setGrid, setAnswerMap, setGameOver])
 
     function createRow(rowArray = [], rowIndex = 0) {
         return <div className='Row' key={`[${rowIndex}]`}>
@@ -43,12 +48,6 @@ function Field() {
         setAnswerMap(newAnswerMap);
     }
 
-    function resetGame() {
-        setGrid(createGrid(questions, SIZE));
-        setAnswerMap(createAnswerMap(SIZE));
-        setGameOver(false);
-    }
-
     React.useEffect(() => {
         if (checkMapForWin(answerMap)) {
             setGameOver(true);
@@ -57,16 +56,16 @@ function Field() {
                 resetGame()
             }
         }
-    }, [answerMap, setGameOver])
+    }, [answerMap, setGameOver, resetGame])
 
     React.useEffect(() => {
         if (gameOver) {
             resetGame()
         }
-    }, [gameOver])
+    }, [gameOver, resetGame])
 
     return <>
-        <button className="ResetGameButton" onClick={() => { resetGame() }}>🔃</button>
+        <button className="ResetGameButton" onClick={() => { resetGame() }}>🔃 refresh bingo table</button>
 
         <main className='Field'>
             {rows}

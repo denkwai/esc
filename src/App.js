@@ -1,5 +1,4 @@
 import React from 'react';
-import useLocalStorageState from 'use-local-storage-state';
 
 import './App.css';
 import Field from './Field';
