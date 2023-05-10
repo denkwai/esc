@@ -5,6 +5,7 @@ import options from './data/options.json';
 import Cell from './Cell';
 import { createAnswerMap, createGrid, checkMapForWin } from './utils';
 import { SIZE } from './constants';
+import classNames from 'classnames';
 
 import './Field.css';
 
@@ -58,14 +59,8 @@ function Field() {
         }
     }, [answerMap, setGameOver, resetGame])
 
-    React.useEffect(() => {
-        if (gameOver) {
-            resetGame()
-        }
-    }, [gameOver, resetGame])
-
     return <>
-        <button className="ResetGameButton" onClick={() => { resetGame() }}>🔃 refresh bingo table</button>
+        <button className={ classNames('ResetGameButton', { 'ResetGameButton--GameOver': gameOver }) } onClick={() => { resetGame() }}>🔃 refresh bingo table</button>
 
         <main className='Field'>
             {rows}
